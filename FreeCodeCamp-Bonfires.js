@@ -296,3 +296,49 @@ where([5, 3, 20, 3], 5) // 2.
 where([2, 20, 10], 19) // 2.
 where([2, 5, 10], 15) // 3.
 
+/*Sum All Numbers in a Range
+We'll pass you an array of two numbers.
+Return the sum of those two numbers and all numbers between them.
+The lowest number will not always come first.
+*/
+function sumAll(arr) {
+    var firstNum;
+    var lastNum;
+    var sum = 0;
+    if(arr[0]<arr[1]){
+        firstNum = arr[0];
+        lastNum = arr[1];
+    }
+    else{
+        firstNum = arr[1];
+        lastNum = arr[0];
+    }
+    for(var i=firstNum;i<=lastNum;i++){
+        sum += i;
+    }
+  return sum;
+}
+
+sumAll([1, 4]);
+
+/*Diff Two Arrays
+Compare two arrays and return a new array with any items only found in one of the original arrays.
+*/
+function diff(arr1, arr2) {
+    var newArr = arr1.concat(arr2);
+  function check(value){
+      if(arr1.indexOf(value) === -1 || arr2.indexOf(value) === -1){
+          console.log(arr1.indexOf(value));
+          console.log(arr2.indexOf(value));
+          return value;
+      }
+  }
+  return newArr.filter(check);
+}
+
+diff([1, 2, 3, 5], [1, 2, 3, 4, 5]); //[4]
+diff(["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]); //["diorite", "pink wool"]
+diff([1, "calf", 3, "piglet"], [1, "calf", 3, 4]); //["piglet", 4]
+diff([], ["snuffleupagus", "cookie monster", "elmo"]); //["snuffleupagus", "cookie monster", "elmo"]
+diff([1, "calf", 3, "piglet"], [7, "filly"]) //[1, "calf", 3, "piglet", 7, "filly"]
+
