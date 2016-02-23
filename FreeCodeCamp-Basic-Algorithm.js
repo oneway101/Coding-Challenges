@@ -63,6 +63,15 @@ function titleCase(str) {
     return title;
 }
 
+function titleCase(str) {
+    var arr = str.toLowerCase().split(" ");
+    var capitalArr =[];
+    for(var i=0;i<arr.length;i++){
+        capitalArr.push(arr[i].charAt(0).toUpperCase() + arr[i].slice(1));
+    }
+  return capitalArr.join(" ");
+}
+
 titleCase("I'm a little tea pot") //should return "I'm A Little Tea Pot".
 titleCase("sHoRt AnD sToUt") //should return "Short And Stout".
 titleCase("HERE IS MY HANDLE HERE IS MY SPOUT") //should return "Here Is My Handle Here Is My Spout".
@@ -296,80 +305,29 @@ where([5, 3, 20, 3], 5) // 2.
 where([2, 20, 10], 19) // 2.
 where([2, 5, 10], 15) // 3.
 
-/*Sum All Numbers in a Range
-We'll pass you an array of two numbers.
-Return the sum of those two numbers and all numbers between them.
-The lowest number will not always come first.
-*/
-function sumAll(arr) {
-    var firstNum;
-    var lastNum;
-    var sum = 0;
-    if(arr[0]<arr[1]){
-        firstNum = arr[0];
-        lastNum = arr[1];
-    }
-    else{
-        firstNum = arr[1];
-        lastNum = arr[0];
-    }
-    for(var i=firstNum;i<=lastNum;i++){
-        sum += i;
-    }
-  return sum;
+/*Caesars Cipher*/
+function rot13(str) {
+   var arr= str.split("");
+   var newarr = [];
+   var charCode;
+   for(var i=0;i<arr.length;i++){
+       charCode = arr[i].charCodeAt(0);
+       if(65>charCode || charCode>90){
+           newarr.push(arr[i]);
+       }
+       else if(charCode+13>90){
+           //console.log(charCode+13);
+           newarr.push(String.fromCharCode(charCode+13-26));
+       }
+       else{
+           //console.log(charCode+13);
+           newarr.push(String.fromCharCode(charCode+13));
+       }
+   }
+ return newarr.join("");
 }
 
-sumAll([1, 4]);
+// Change the inputs below to test
+rot13("SERR PBQR PNZC"); //FREE CODE CAMP
 
-/*Diff Two Arrays
-Compare two arrays and return a new array with any items only found in one of the original arrays.
-*/
-function diff(arr1, arr2) {
-    var newArr = arr1.concat(arr2);
-  function check(value){
-      if(arr1.indexOf(value) === -1 || arr2.indexOf(value) === -1){
-          console.log(arr1.indexOf(value));
-          console.log(arr2.indexOf(value));
-          return value;
-      }
-  }
-  return newArr.filter(check);
-}
-
-diff([1, 2, 3, 5], [1, 2, 3, 4, 5]); //[4]
-diff(["andesite", "grass", "dirt", "pink wool", "dead shrub"], ["diorite", "andesite", "grass", "dirt", "dead shrub"]); //["diorite", "pink wool"]
-diff([1, "calf", 3, "piglet"], [1, "calf", 3, 4]); //["piglet", 4]
-diff([], ["snuffleupagus", "cookie monster", "elmo"]); //["snuffleupagus", "cookie monster", "elmo"]
-diff([1, "calf", 3, "piglet"], [7, "filly"]) //[1, "calf", 3, "piglet", 7, "filly"]
-
-
-/*Search and Replace
-Perform a search and replace on the sentence using the arguments provided and return the new sentence.
-First argument is the sentence to perform the search and replace on.
-Second argument is the word that you will be replacing (before).
-Third argument is what you will be replacing the second argument with (after).
-NOTE: Preserve the case of the original word when you are replacing it.
-For example if you mean to replace the word "Book" with the word "dog", it should be replaced as "Dog"
-*/
-function myReplace(str, before, after) {
-    var arr = str.split(" ");
-    var replace = after;
-    if(before[0] === before[0].toUpperCase()){
-        replace = after[0].toUpperCase() + after.slice(1);
-        console.log(replace);
-    }
-    for(var i=0;i<arr.length;i++){
-        if(arr[i] === before){
-            arr.splice(i,1,replace);
-        }
-    }
-    
-  return arr.join(" ");
-}
-
-myReplace("Let us go to the store", "store", "mall"); //"Let us go to the mall".
-myReplace("He is Sleeping on the couch", "Sleeping", "sitting"); //"He is Sitting on the couch".
-myReplace("This has a spellngi error", "spellngi", "spelling"); //"This has a spelling error".
-myReplace("His name is Tom", "Tom", "john") //"His name is John".
-myReplace("Let us get back to more Coding", "Coding", "algorithms"); //"Let us get back to more Algorithms".
 
